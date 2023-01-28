@@ -1,11 +1,13 @@
 import React ,{useState}from 'react'
 import axios from 'axios'
 import {MdUpArrow} from 'react-icons/md'
-import { Link } from 'react-router-dom'
+import { Link ,useNavigate} from 'react-router-dom'
+import {BiArrowBack} from 'react-icons/bi'
 const Edit = () => {
     const[value,setValue]=useState('')
     const[answer,setAnswer]=useState('')
     const[message,setMessage]=useState([])
+    const navigate = useNavigate()
     let Object = {
         quizname:value.quizname,
         questionname:value.question,
@@ -29,14 +31,14 @@ const Edit = () => {
         setMessage(old=>[...old,value.options]);  
     } 
    async function sendData(){
-   await axios.post('http://localhost:4000/api/insert',{datas:Object}).then(res=>console.log(res))
+   await axios.post('http://localhost:4000/api/insert',{datas:Object}).then(res=>{if(res.data.success == "success")navigate('/')})
    }
     
   return (
    <>
     <div className="containers">
     <div className="inner-containers">
-        <div className='icon'><Link to={'/'}>back</Link></div>
+        <div className='icon'><Link to={'/'}><BiArrowBack size={20}/></Link></div>
         <div className="topics">Question Entry</div>
         <div className="all-inputs">
         <div className="input1">

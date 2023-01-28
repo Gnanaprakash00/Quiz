@@ -1,9 +1,74 @@
-import React from 'react'
-
+import React,{useState,useEffect} from 'react'
+import { Link ,useNavigate} from 'react-router-dom'
+import axios from 'axios'
+import {BiArrowBack} from 'react-icons/bi'
 const Edit2 = () => {
+  const[value,setValue]=useState([])
+  const[answer,setAnswer]=useState()
+  const[options,setOptions]=useState([])
+  const[change,setChange]=useState()
+  const navigate = useNavigate()
+  useEffect(()=>{
+    async function fetchData(){
+      try {
+        let token = localStorage.getItem('tokenid')
+        await axios.post('http://localhost:4000/api/edit2',{id:token}).then(res=>setValue(res.data.user)+setOptions(res.data.user.options)+setAnswer(res.data.user.answer))
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+    fetchData()
+  },[])
+  
+  const Navigation = async()=>{
+   await localStorage.removeItem('tokenid')
+   navigate('/')
+  }
+  
+  async function Update(){
+    let token = localStorage.getItem('tokenid')
+    let input1 = document.getElementById('input1').value
+    let input2 = document.getElementById('input2').value
+    await axios.post('http://localhost:4000/api/update',{
+      id:token,
+      quizname:input1,
+      questionname:input2,
+      options:options,
+      answer:change
+    }).then(res=>{if(res.data.success == "success")navigate('/')})
+  }
   return (
     <div>
-      hi
+     
+      
+      <div className="containers">
+    <div className="inner-containers">
+        <div className='icon' onClick={()=>Navigation()}><BiArrowBack size={20}/></div>
+        <div className="topics">Edit Question</div>
+        <div className="all-inputs">
+        <div >
+        <input type="text" id='input1'  onChange={(event)=>setValue(event.target.value)} value={value.quizname}/>
+       </div>
+       <div >
+       <input type="text" id='input2' onChange={(e)=>setValue(e.target.value)} value={value.questionname}/> 
+       </div>
+       <div>
+     </div>
+        </div>
+        <div className="options">
+        {
+    options.map((item,index)=>{
+        return (
+            <ul style={{padding:'0 1.5rem'}} key={index}>
+            <li><input name="name"  className='radio' type="radio" onClick={()=>setChange(index + 1)} defaultChecked={index === answer - 1}/> <label>{item}</label></li>
+            </ul>  
+        )
+    })
+   }
+    <button className="btn" onClick={()=>Update()}>save</button> 
+    </div>
+    </div>
+    </div>
     </div>
   )
 }
