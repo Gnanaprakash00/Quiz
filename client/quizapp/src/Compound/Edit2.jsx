@@ -10,7 +10,7 @@ const Edit2 = () => {
   const[change,setChange]=useState()
   const[addoption,setAddoption] = useState()
   const navigate = useNavigate()
-  let message = "prakash"
+ 
   useEffect(()=>{
     async function fetchData(){
       try {
@@ -26,7 +26,12 @@ const Edit2 = () => {
   const PushMessage=()=>{
     setOptions(old=>[...old,addoption]);  
 }
- 
+  const RemoveOption=(index)=>{
+  let newArray = options
+  newArray.splice(index,1)
+  setOptions([...newArray]) 
+}
+
 const Navigation = async()=>{
    await localStorage.removeItem('tokenid')
    navigate('/')
@@ -54,10 +59,10 @@ const Navigation = async()=>{
         <div className="topics">Edit Question</div>
         <div className="all-inputs">
         <div >
-        <input type="text" id='input1'  onChange={(e)=>setValue(e.target.value)} value={message} />
+        <input type="text" id='input1'  onChange={(e)=>setValue(e.target.value)} value={value.quizname} />
        </div>
        <div >
-       <input type="text" id='input2' onChange={(e)=>setValue(e.target.value)} value={message}/> 
+       <input type="text" id='input2' onChange={(e)=>setValue(e.target.value)} value={value.questionname}/> 
        </div>
        <div>
        <input type="text" name='options' placeholder='Options' onChange={(e)=>setAddoption(e.target.value)}/> <button className='change-btn' onClick={()=>PushMessage()}>ADD OPTION</button>
@@ -73,6 +78,7 @@ const Navigation = async()=>{
             <li>
               <input name="name"  className='radio' type="radio" onClick={()=>setChange(index + 1)} defaultChecked={index === answer - 1}/> 
               <p>{item}</p>
+              <button className='option-remove-btn' onClick={()=>RemoveOption(index)}><MdClose size={17}/></button>
             </li>
             </ul>  
         )
