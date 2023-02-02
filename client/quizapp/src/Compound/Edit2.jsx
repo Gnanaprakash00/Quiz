@@ -8,7 +8,9 @@ const Edit2 = () => {
   const[answer,setAnswer]=useState()
   const[options,setOptions]=useState([])
   const[change,setChange]=useState()
+  const[addoption,setAddoption] = useState()
   const navigate = useNavigate()
+  let message = "prakash"
   useEffect(()=>{
     async function fetchData(){
       try {
@@ -20,8 +22,12 @@ const Edit2 = () => {
     }
     fetchData()
   },[])
-  
-  const Navigation = async()=>{
+    
+  const PushMessage=()=>{
+    setOptions(old=>[...old,addoption]);  
+}
+ 
+const Navigation = async()=>{
    await localStorage.removeItem('tokenid')
    navigate('/')
   }
@@ -48,10 +54,13 @@ const Edit2 = () => {
         <div className="topics">Edit Question</div>
         <div className="all-inputs">
         <div >
-        <input type="text" id='input1'  onChange={(e)=>setValue(e.target.value)} value={value.quizname} />
+        <input type="text" id='input1'  onChange={(e)=>setValue(e.target.value)} value={message} />
        </div>
        <div >
-       <input type="text" id='input2' onChange={(e)=>setValue(e.target.value)} value={value.questionname} /> 
+       <input type="text" id='input2' onChange={(e)=>setValue(e.target.value)} value={message}/> 
+       </div>
+       <div>
+       <input type="text" name='options' placeholder='Options' onChange={(e)=>setAddoption(e.target.value)}/> <button className='change-btn' onClick={()=>PushMessage()}>ADD OPTION</button>
        </div>
        <div>
      </div>
