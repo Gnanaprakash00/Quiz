@@ -51,10 +51,10 @@ const Edit = () => {
         <div className="topics">Question Entry</div>
         <div className="all-inputs">
         <div className="input1">
-       <input type="text" name="quizname" placeholder='Quizname' onChange={(e)=>setValue({...value,[e.target.name]:e.target.value})}/> <button className='change-btn' onClick={()=>Visible()}>ADD QUESTION</button>
+       <input type="text" name="quizname" placeholder='Quizname' onChange={(e)=>setValue({...value,[e.target.name]:e.target.value})}/> <button className='change-btn' onClick={()=>Visible()}>ADD QUIZ</button>
        </div>
        <div className="input2" id="input2">
-       <input type="text"  name='question' placeholder='Question' onChange={(e)=>setValue({...value,[e.target.name]:e.target.value})}/> <button className='change-btn' onClick={()=>Visible()}>ADD QUIZ</button>
+       <input type="text"  name='question' placeholder='Question' onChange={(e)=>setValue({...value,[e.target.name]:e.target.value})}/> <button className='change-btn' onClick={()=>Visible()}>ADD QUESTION</button>
        </div>
        <div className="input3" id='input3'>
        <input type="text" name='options' placeholder='Options' onChange={(e)=>setValue({...value,[e.target.name]:e.target.value})} /> <button className='change-btn' onClick={()=>PushMessage()}>ADD OPTION</button>
