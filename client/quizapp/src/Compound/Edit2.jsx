@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useRef} from 'react'
 import { Link ,useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import {BiArrowBack} from 'react-icons/bi'
@@ -10,7 +10,7 @@ const Edit2 = () => {
   const[change,setChange]=useState()
   const[addoption,setAddoption] = useState()
   const navigate = useNavigate()
- 
+
   useEffect(()=>{
     async function fetchData(){
       try {
@@ -59,10 +59,10 @@ const Navigation = async()=>{
         <div className="topics">Edit Question</div>
         <div className="all-inputs">
         <div >
-        <input type="text" id='input1'  onChange={(e)=>setValue(e.target.value)} value={value.quizname} />
+        <input type="text" id='input1'  onChange={(e)=>setValue(e.target.value)}  value={value.quizname} />
        </div>
        <div >
-       <input type="text" id='input2' onChange={(e)=>setValue(e.target.value)} value={value.questionname}/> 
+       <input type="text" id='input2' onChange={(e)=>setValue(e.target.value)}  value={value.questionname}/> 
        </div>
        <div>
        <input type="text" name='options' placeholder='Options' onChange={(e)=>setAddoption(e.target.value)}/> <button className='change-btn' onClick={()=>PushMessage()}>ADD OPTION</button>

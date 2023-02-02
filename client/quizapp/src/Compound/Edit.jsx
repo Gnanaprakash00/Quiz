@@ -21,10 +21,14 @@ const Edit = () => {
         var input3 = document.getElementById('input3')
         if(value.quizname?.length >= 1){
          input2.style.visibility="visible"
-        }
-        if(value.question?.length >= 1){
+         if(value.question?.length >= 1){
             input3.style.visibility="visible"
+            }
+         if(value.options?.length>=1){
+            return true
+         }  
         }
+        return false
         
     }
     
@@ -40,7 +44,12 @@ const Edit = () => {
     }
 
    async function sendData(){
-   await axios.post('http://localhost:4000/api/insert',{datas:Object}).then(res=>{if(res.data.success == "success")navigate('/')})
+    if(Visible()){
+        await axios.post('http://localhost:4000/api/insert',{datas:Object}).then(res=>{if(res.data.success == "success")navigate('/')})
+    }else{
+        alert("Please Enter Input")
+    }
+   
    }
     
   return (
