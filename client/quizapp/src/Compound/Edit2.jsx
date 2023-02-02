@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import { Link ,useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import {BiArrowBack} from 'react-icons/bi'
+import {MdClose} from 'react-icons/md'
 const Edit2 = () => {
   const[value,setValue]=useState([])
   const[answer,setAnswer]=useState()
@@ -47,10 +48,10 @@ const Edit2 = () => {
         <div className="topics">Edit Question</div>
         <div className="all-inputs">
         <div >
-        <input type="text" id='input1'  onChange={(event)=>setValue(event.target.value)} value={value.quizname}/>
+        <input type="text" id='input1'  onChange={(e)=>setValue(e.target.value)} value={value.quizname} />
        </div>
        <div >
-       <input type="text" id='input2' onChange={(e)=>setValue(e.target.value)} value={value.questionname}/> 
+       <input type="text" id='input2' onChange={(e)=>setValue(e.target.value)} value={value.questionname} /> 
        </div>
        <div>
      </div>
@@ -60,12 +61,15 @@ const Edit2 = () => {
     options.map((item,index)=>{
         return (
             <ul style={{padding:'0 1.5rem'}} key={index}>
-            <li><input name="name"  className='radio' type="radio" onClick={()=>setChange(index + 1)} defaultChecked={index === answer - 1}/> <label>{item}</label></li>
+            <li>
+              <input name="name"  className='radio' type="radio" onClick={()=>setChange(index + 1)} defaultChecked={index === answer - 1}/> 
+              <p>{item}</p>
+            </li>
             </ul>  
         )
     })
    }
-    <button className="btn" onClick={()=>Update()}>save</button> 
+    <button className='btn' onClick={()=>Update()}>SAVE</button> 
     </div>
     </div>
     </div>

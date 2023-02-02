@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 }
 
 body {
@@ -98,8 +99,8 @@ body {
 }
 
 .inner-containers {
-    width: 350px;
-    height: 600px;
+    width: 400px;
+    height: 650px;
     background-color: #ffffff;
     overflow: hidden;
     border-radius: 20px;
@@ -119,8 +120,9 @@ input {
     outline: none;
     border: none;
     padding: 0.7rem 2rem;
-    background-color: aliceblue;
+    background-color: rgb(216, 214, 214);
     border-radius: 5px;
+    color: black;
 }
 
 button {
@@ -134,13 +136,20 @@ button {
     transition: all 0.1s linear;
 }
 
+.change-btn {
+    width: 155px;
+    background-color: #4deeea;
+}
+
 .btn {
-    margin: 0 38%;
+    margin: 2rem 38%;
 }
 
 ul li {
     list-style: none;
     font-size: 13px;
+    display: flex;
+    gap: 0.7rem;
 }
 
 .topics {
@@ -158,4 +167,12 @@ ul li {
 
 .icon {
     padding: 1rem 1rem;
+}
+
+.option-remove-btn {
+    border: none;
+    outline: none;
+    padding: 0;
+    background-color: transparent;
+    margin: 0 0.5rem;
 }
