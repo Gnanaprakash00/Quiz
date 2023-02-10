@@ -3,15 +3,21 @@ import { Link , useNavigate} from 'react-router-dom'
 import {MdDeleteOutline,MdEditNote} from 'react-icons/md'
 import axios from 'axios'
 const Landing = () => {
-    const[questions,setQuestions]=useState([])
-    const navigate = useNavigate()
-   const RemoveQuez = (id)=>{
-    axios.post('http://localhost:4000/api/delete',{id:id}).then(res=>{if(res.data.delete){window.location.replace('http://localhost:3000')}})
+    const[questions,setQuestions]=useState([JSON.parse(localStorage.getItem('QUIZ2'))])
+    
+    let sample = {
+        quizname:null,
+        questions:[]
     }
-    const SelectQuez = async(id)=>{
-      await localStorage.setItem('tokenid',id);
-      navigate('/edit2')
+     localStorage.setItem("QUIZ2",JSON.stringify(sample))
+
+    function remove(index){
+        const newArr = questions
+        const changeArr = [...newArr]
+        changeArr.splice(index,1)
+        localStorage.setItem("QUIZ2",JSON.stringify(changeArr))
     }
+   
     const List = ()=>{
         return (
             <>
@@ -19,7 +25,7 @@ const Landing = () => {
                 return (
                     <tr key={index}>
                     <td>{item.quizname}</td>
-                    <td><span style={{padding:'0 1.8rem 0 0'}}><MdDeleteOutline size={20} className="delete" onClick={()=>RemoveQuez(item._id)} color="#ff2400"/></span><MdEditNote size={20} onClick={()=>SelectQuez(item._id)} className="edit" color="#39ff14"/></td>
+                    <td><span style={{padding:'0 1.8rem 0 0'}}><MdDeleteOutline size={20} className="delete"  onClick={()=>remove(index)} color="#ff2400"/></span><Link to={'/list'}><MdEditNote size={20}  className="edit" color="#39ff14"/></Link></td>
                     </tr>
                 )
             })}
@@ -28,15 +34,12 @@ const Landing = () => {
     }
 
 
-    useEffect(()=>{
-        axios.get('http://localhost:4000/api/getall')
-        .then(data=>setQuestions(data.data.user))
-    },[])
+    
   return (
-   <>
+   <>   
    <div className="container">
     <div className="inner-container">
-        <div className="inner-container-top"><Link to={'/edit'}><button>Add Quiz</button></Link></div>
+        <div className="inner-container-top"><Link to={'/list'}><button>Add Quiz</button></Link></div>
         <div className="inner-container-down">
             <table className="table">
                 <thead>
